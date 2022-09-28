@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Issue;
 use App\Post;
-use App\Tag;
-use App\User;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Support\Carbon;
@@ -18,50 +15,14 @@ class IssueController extends Controller
 
         $timezone = 'Asia/Ho_Chi_Minh';
 
-        // $this->insert();
-        // $issue = Issue::query()->latest()->first();
-
-        $issue = Issue::query()->get();
-
         $createdAtCompare = Carbon::now()->setTimezone($timezone);
-        dump($createdAtCompare);
 
         $createdAtCompare = (new DateTime(date('Y-m-d H:i:s')))->setTimezone(new DateTimeZone($timezone));
-        dump($createdAtCompare);
 
-        $data = Issue::query()
-            ->where('created_at', '<=', $createdAtCompare)
-            ->get();
-        dump($data);
+        $issue = Issue::query()->where('created_at', '<=', $createdAtCompare)->get();
 
-        // return response()->json($issue)
-        //     ->header('content-type', 'application/json');
         return view('welcome', ['issue' => $issue]);
     }
-
-
-    public function insert()
-    {
-        $formatDate = 'Y-m-d H:i:s';
-        $birthday = DateTime::createFromFormat($formatDate, '1993-08-20 12:00:00')->format($formatDate);
-
-        $issue = new Issue([
-            'first_name' => 'trieu',
-            'lastName' => 'thi huyen trang',
-            'age' => 28,
-            'is_male' => false,
-            'options' => [
-                'birthday' => $birthday,
-                'job' => 'maketing',
-                'childs' => 3,
-                'happy' => true,
-            ]
-        ]);
-
-        $issue->saveOrFail();
-        return $issue;
-    }
-
 
     public function db()
     {
@@ -89,11 +50,8 @@ class IssueController extends Controller
                     // thì cần chỉ rõ ràng field select ở table nào
                     $query->select(['tags.id', 'tags.name']);
                 }
-            ])
-            ->get();
+            ])->get();
 
-        dump($post->toArray());
-        return 'hello';
         return response()->json($post);
     }
 }

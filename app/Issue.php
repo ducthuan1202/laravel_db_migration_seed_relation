@@ -17,6 +17,7 @@ class Issue extends Model
 
     // cast sẽ thực hiện convert data lấy từ db sang model.
     // accessor thì convert dữ liệu khi field đó được gọi.
+    // cast hoạt động cả với seeder
     protected $casts = [
         'first_name' => TextTitleCast::class,
         'lastName' => TextTitleCast::class,
