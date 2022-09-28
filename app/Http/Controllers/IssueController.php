@@ -66,33 +66,34 @@ class IssueController extends Controller
     public function db()
     {
 
-        // $user = User::where('id', 1)
-        //     ->with(['categories', 'posts'])
-        //     ->first();
-        //    dump($user);
+        # SELECT * FROM `posts` WHERE `id` IN (11, 55, 88)
+        $post = Post::whereIn('id', [11, 55, 88])
+            ->with([
 
-        // $category = Category::where('id', 1)
-        //     ->with(['user'])
-        //     ->first();
-        // dump($category);
+                # SELECT `id`, `name` FROM `categories` WHERE `categories`.`id` IN (2, 6, 9)
+                'category' => function ($query) {
+                    $query->select(['id', 'name']);
+                },
 
-        /**
-         * action cho quan he n-n
-         * attach: them
-         * detach: xoa
-         * sync: dong bo, neu chua co thi them
-         * toggle: co thi xoa, chua co thi them
-         */
+                # SELECT `id`, `name`, `email` FROM `users` 
+                # WHERE `users`.`email` IN ('destany.zboncak@example.org', 'janelle95@example.net', 'sherman33@example.org')
+                'user' => function ($query) {
+                    $query->select(['id', 'name', 'email']);
+                },
 
-        $post = Post::where('id', 1)
-            ->with(['category', 'user'])
-            ->first();
-        $tags = Tag::take(3)->get();
-        $post->tags()->sync($tags);
+                # SELECT `tags`.`id`, `tags`.`name`, `posts_tags`.`post_id` AS `pivot_post_id`, `posts_tags`.`tag_id` AS `pivot_tag_id` 
+                # FROM `tags` INNER JOIN `posts_tags` ON `tags`.`id` = `posts_tags`.`tag_id` 
+                # WHERE `posts_tags`.`post_id` in (11, 55, 88)
+                'tags' => function ($query) {
+                    // với quan hệ n-n, có sử dụng pivot key
+                    // thì cần chỉ rõ ràng field select ở table nào
+                    $query->select(['tags.id', 'tags.name']);
+                }
+            ])
+            ->get();
 
-        $tag = Tag::find(5);
-        $tag->posts()->sync($post);
-
-        dump($tag);
+        dump($post->toArray());
+        return 'hello';
+        return response()->json($post);
     }
 }

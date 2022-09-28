@@ -10,6 +10,12 @@ class Post extends Model
         'title', 'category_id', 'views', 'status', 'is_feature',
     ];
 
+    protected $hidden = ['pivot'];
+
+    protected $casts = [
+        'is_feature' => 'boolean',        
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'owner', 'email');
