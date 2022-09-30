@@ -35,23 +35,21 @@ class UserController extends Controller
 
     public function create()
     {
-        $user = new User([
-            'name' => 'Demo 5 ky tu',
-            'email' => 'thuannd2@vmodev.com',
-        ]);
+        $user = new User();
 
-        $errors = new MessageBag([
-            'name' => 'sai lam',
-            'email' => 'invalid',
-        ]);
+        // $errors = new MessageBag([
+        //     'name' => 'sai lam',
+        //     'email' => 'invalid',
+        // ]);
 
-        $virtualError = new ViewErrorBag();
-        $virtualError->put('default', $errors);
+        // $virtualError = new ViewErrorBag();
+        // $virtualError->put('default', $errors);
 
         return view('users.form', [
             'title' => 'Create user',
             'model' => $user,
-        ])->withErrors($virtualError->getBag('default'));
+        ]);
+        // ->withErrors($virtualError->getBag('default'));
     }
 
     public function store(UserCreateRequest $request)

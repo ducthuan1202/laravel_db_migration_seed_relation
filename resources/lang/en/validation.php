@@ -130,9 +130,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        // 'is_active' => [
+        //     'present' => 'Thuộc tính `Is Active` là bắt buộc',
+        // ],
     ],
 
     /*
@@ -146,6 +146,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'is_active' => 'Kích hoạt'
+    ],
 
 ];

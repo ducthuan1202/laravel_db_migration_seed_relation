@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TestValidateRequest;
 use App\Issue;
 use App\Post;
 use DateTime;
@@ -53,5 +54,11 @@ class IssueController extends Controller
             ])->get();
 
         return response()->json($post);
+    }
+
+    public function validateData(TestValidateRequest $request){
+        $attr = $request->validated();
+        dd($attr);
+        return response()->json($attr);
     }
 }

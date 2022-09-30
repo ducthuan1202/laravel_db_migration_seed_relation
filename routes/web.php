@@ -17,6 +17,9 @@ Route::view('/', 'welcome');
 Route::get('/issues', 'IssueController@index');
 Route::get('/db', 'IssueController@db');
 
+Route::view('/validate', 'validate');
+Route::post('/validate', 'IssueController@validateData')->name('issue.validate');
+
 Route::get('/page-request', 'PageController@request')->name('page.request');
 
 Route::view('/login', 'auth.login')->name('auth.form');
@@ -27,10 +30,12 @@ Route::post('/login-admin', 'AuthAdminController@login')->name('auth_admin.login
 
 Route::get('/page-member', 'PageController@forMember')->name('page.member');
 
+Route::resource('users', 'UserController');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/logout', 'AuthController@login')->name('auth.logout');
 
-    Route::resource('users', 'UserController')->middleware(['checkRole:admin']);
+    
 });
 
 ////////////////////// ADMIN GAURD //////////////////////
