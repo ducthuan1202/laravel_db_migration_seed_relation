@@ -17,6 +17,8 @@ Route::view('/', 'welcome');
 Route::get('/issues', 'IssueController@index');
 Route::get('/db', 'IssueController@db');
 
+Route::get('/posts', 'PostController@index');
+
 Route::view('/validate', 'validate');
 Route::post('/validate', 'IssueController@validateData')->name('issue.validate');
 
@@ -34,8 +36,6 @@ Route::resource('users', 'UserController');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/logout', 'AuthController@login')->name('auth.logout');
-
-    
 });
 
 ////////////////////// ADMIN GAURD //////////////////////

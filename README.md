@@ -2,6 +2,7 @@
 
 - [migrations](https://laravel.com/docs/7.x/migrations)
 - [accessor, mutators, cast](https://laravel.com/docs/7.x/eloquent-mutators)
+- [check device](https://github.com/jenssegers/agent)
 
 
 - Event -> Listener: trigger trực tiếp 

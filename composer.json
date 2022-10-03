@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.3"
@@ -25,6 +26,7 @@
         "phpunit/phpunit": "^8.5.8|^9.3.3"
     },
     "config": {
+        "process-timeout": 0,
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
@@ -54,6 +56,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "start": "@php artisan serve --port=3333",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
