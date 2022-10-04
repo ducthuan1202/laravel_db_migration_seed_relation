@@ -20,6 +20,11 @@ class CreateCategoriesTable extends Migration
             // tạo khóa ngoại, categories.created_by = users.id
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+
+
+            // parent-child categories
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('categories');
             
             $table->timestamps();
         });

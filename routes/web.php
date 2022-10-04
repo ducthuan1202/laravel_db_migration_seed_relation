@@ -18,6 +18,7 @@ Route::get('/issues', 'IssueController@index');
 Route::get('/db', 'IssueController@db');
 
 Route::get('/posts', 'PostController@index');
+Route::get('/categories', 'CategoryController@index');
 
 Route::view('/validate', 'validate');
 Route::post('/validate', 'IssueController@validateData')->name('issue.validate');
